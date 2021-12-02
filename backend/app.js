@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const helmet = require('helmet');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv').config()
+require('dotenv').config()
 
 // the path module provides utilities for working with file and directory paths
 const path = require('path');;
