@@ -1,7 +1,9 @@
 // Logique métier
 const Sauce = require('../models/Sauce');
+
 // Récupération du module 'file system' de Node
 const fs = require('fs');
+
 // Création d'une sauce (Post)
 exports.createSauce = (req, res, _next) => {
     // Extraire l'objet JSON de "sauce"
@@ -20,23 +22,34 @@ exports.createSauce = (req, res, _next) => {
         .catch(error => res.status(400).json({ error }));
 };
 
-exports.modifySauce = (req, res, _next) => {
-
-    // ternary operator
-    const sauceObject = req.file ?
-
-        // Check if one image already exists
-        {
-            ...JSON.parse(req.body.sauce),
-
-            // "://" allows "req.protocol" and "req.get" connection
-            imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-        } : { ...req.body };
-
-    // if there is no image
-    Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
-        .then(() => res.status(200).json({ message: 'Objet modifié !' }))
-        .catch(error => res.status(400).json({ error }));
+exports.modifySauce = (req, res, next) => {
+    Sauce.findOne({ _id: req.params.id })
+        .then(sauceModify => {
+            const oldUrl = Sauce.imageUrl;
+            const filename = sauceModify.imageUrl.split('/images/')[1];
+            if (req.file) {
+                const sauceObject = {
+                    ...JSON.parse(req.body.sauce),
+                    imageUrl:
+                        `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+                }
+                fs.unlink(`images/${filename}`, () => {
+                    Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
+                        .then(() => res.status(200).json({ message: 'Objet modifié !' }))
+                        .catch(error => res.status(400).json({ error }));
+                });
+            } else {
+                const sauceObject2 = req.body;
+                sauceObject2.imageUrl = oldUrl;
+                Sauce.updateOne({ _id: req.params.id }, {
+                    ...sauceObject2, _id:
+                        req.params.id
+                })
+                    .then(() => res.status(200).json({ message: 'Objet modifié !' }))
+                    .catch(error => res.status(400).json({ error }));
+            }
+        })
+        .catch(error => res.status(500).json({ error }))
 };
 
 // delete one sauce
