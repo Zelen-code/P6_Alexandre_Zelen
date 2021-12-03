@@ -21,9 +21,9 @@ Rendez-vous sur [GitHub](https://github.com/OpenClassrooms-Student-Center/Web-De
 ## Installation
 
 ### Front-End : 
-npm install (dans le terminal de commande) / npm start
+<code>npm install</code> (dans le terminal de commande) / <code>npm start</code>
 ### Back-End : 
-npm install -g nodemon / nodemon serve
+<code>npm install -g nodemon</code> / <code>nodemon serve</code>
 
 ## Licence
 
