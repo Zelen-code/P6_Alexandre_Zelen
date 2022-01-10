@@ -1,6 +1,6 @@
 # Construisez une API sécurisée pour une application d'avis gastronomiques
 
-# :fire: Piiquante :fire:
+# :fire: Hot Takes :fire:
 
 _Contactez-moi_
 * :dove: : @alexandre_zelen
