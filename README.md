@@ -23,6 +23,8 @@ Rendez-vous sur [GitHub](https://github.com/OpenClassrooms-Student-Center/Web-De
 ### Front-End : 
 <code>npm install</code> (dans le terminal de commande) / <code>npm start</code>
 ### Back-End : 
+Renommer le env.sample en .env et le remplir.
+
 <code>npm install -g nodemon</code> / <code>nodemon serve</code>
 
 ## Licence
