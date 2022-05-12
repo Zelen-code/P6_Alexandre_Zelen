@@ -3,7 +3,6 @@
 # :fire: Hot Takes :fire:
 
 _Contactez-moi_
-* :dove: : @alexandre_zelen
 * LinkedIn : linkedin.com/in/alexandre-zelen-64b415223
 
 ## Mission
